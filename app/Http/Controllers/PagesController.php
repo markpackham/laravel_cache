@@ -32,7 +32,7 @@ class PagesController extends Controller
         Cache::decrement('cachekey2', 1);
 
         // $test = cache()->get();
-        dd(Cache::get('cachekey2'));
+        // dd(Cache::get('cachekey2'));
         return view('index');
     }
 }
