@@ -16,11 +16,15 @@ class PagesController extends Controller
         // as you'd expect a forever method has no time limit
         Cache::forever('cachekey2', "I am key 2");
 
-        // the only way to get rid of the forever cache other than flushing everything
-        Cache::forget('cachekey2');
+        // // the only way to get rid of the forever cache other than flushing everything
+        // Cache::forget('cachekey2');
 
-        // clear all cache
-        Cache::flush();
+        // // clear all cache
+        // Cache::flush();
+
+        if (Cache::has('cachekey2')) {
+            dd('Cache does exist');
+        }
 
         // $test = cache()->get();
         dd(Cache::get('cachekey2'));
