@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\PostCreated;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Event;
 
 class PostController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +18,15 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        Event::dispatch(new PostCreated());
+
+        $posts = cache('posts', function () {
+            return Post::get();
+        });
+
+        dd(Cache::get('posts'));
+
+        return view('blog.index', $posts);
     }
 
     /**
